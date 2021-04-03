@@ -1,29 +1,31 @@
 package com.example.acode.student;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="api/v1/student")
+@RequestMapping(path="api/v1")
 public class StudentController {
 
-    @GetMapping
-    public String hello(){
-        return "Hello World";
-    }
-    @GetMapping ("/json")
-    public List<String> hello2(){
-        return List.of("Hello!", "World");
+    private final StudentSevice studentSevice;
+
+    @Autowired
+    public StudentController(StudentSevice studentSevice) {
+        this.studentSevice = studentSevice;
     }
     @GetMapping("/students")
-    public List<Student> hello3(){
-        return List.of(new
-                Student(1L,"Maria",  LocalDate.of(1991, Month.FEBRUARY,22), 30,"Maria@email.com")
-        );
+    public List<Student> getStudents(){
+        return studentSevice.getStudents();
+    }
+    @GetMapping("/hello2")
+    public List<String> hello2(){
+        return studentSevice.hello2();
+    }
+    @GetMapping("/hello")
+    public String hello(){
+        return studentSevice.hello();
     }
 }

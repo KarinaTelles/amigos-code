@@ -12,7 +12,6 @@ import java.util.List;
 
 @SpringBootApplication
 public class AcodeApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(AcodeApplication.class, args);
     }
